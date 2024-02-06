@@ -4,13 +4,10 @@
 #include<iomanip>
 using namespace std;
 
-void showData(double *,int,int);
-
-void randData(double *,int,int);
-
-void findRowSum(const double *,double *,int,int);
-
-void findColSum(const double *,double *,int,int);
+void showData(double* data, int rows, int cols);
+void randData(double* data, int rows, int cols);
+void findRowSum(const double* data, double* sum, int rows, int cols);
+void findColSum(const double* data, double* sum, int rows, int cols);
 
 int main(){
 	srand(time(0));
@@ -31,4 +28,37 @@ int main(){
 	
 	findColSum(dPtr,sum2,N,M); 
 	showData(sum2,1,M);
+}
+
+void randData(double* data, int rows, int cols) {
+    for (int i = 0; i < rows * cols; ++i) {
+        data[i] = static_cast<double>(rand() % 100) / 100.0;
+    }
+}
+
+void showData(double* data, int rows, int cols) {
+    for (int i = 0; i < rows; ++i) {
+        for (int j = 0; j < cols; ++j) {
+            cout << fixed << setprecision(2) << data[i * cols + j] << " ";
+        }
+        cout << endl;
+    }
+}
+
+void findRowSum(const double* data, double* sum, int rows, int cols) {
+    for (int i = 0; i < rows; ++i) {
+        sum[i] = 0;
+        for (int j = 0; j < cols; ++j) {
+            sum[i] += data[i * cols + j];
+        }
+    }
+}
+
+void findColSum(const double* data, double* sum, int rows, int cols) {
+    for (int j = 0; j < cols; ++j) {
+        sum[j] = 0;
+        for (int i = 0; i < rows; ++i) {
+            sum[j] += data[i * cols + j];
+        }
+    }
 }
